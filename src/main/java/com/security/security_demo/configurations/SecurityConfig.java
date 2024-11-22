@@ -16,28 +16,28 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Bean
-    public UserDetailsService userDetails() {
-        UserDetails user = User.withUsername("User")
-                .password("{noop}User")
-//                .roles("USER")
-                .authorities("USER")
-                .build();
-
-        UserDetails admin = User.withUsername("Admin")
-                .password("{noop}Admin")
-//                .roles("USER", "ADMIN")
-                .authorities("USER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
-    }
+//    @Bean
+//    public UserDetailsService userDetails() {
+//        UserDetails user = User.withUsername("User")
+//                .password("{noop}User")
+////                .roles("USER")
+//                .authorities("USER")
+//                .build();
+//
+//        UserDetails admin = User.withUsername("Admin")
+//                .password("{noop}Admin")
+////                .roles("USER", "ADMIN")
+//                .authorities("USER", "ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/*/public").permitAll()
+                        .requestMatchers("/customer/register").permitAll()
 //                        .requestMatchers("/user/**").hasRole("USER")
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/***").hasAuthority("USER")
